@@ -73,6 +73,17 @@ return [
             'after_commit' => false,
         ],
 
+        'rabbitmq' => [
+            'driver' => 'rabbitmq',
+            'host' => env('RABBITMQ_HOST', '127.0.0.1'),
+            'port' => env('RABBITMQ_PORT', 5672),
+            'queue' => env('RABBITMQ_QUEUE', 'default'),
+            'password' => env('RABBITMQ_PASSWORD', 'guest'),
+            'user' => env('RABBITMQ_USER', 'guest'),
+            'vhost' => env('RABBITMQ_VHOST', '/'),
+            // ...
+        ],
+
         'deferred' => [
             'driver' => 'deferred',
         ],
