@@ -39,8 +39,7 @@ services:
         uid: 1000
       context: ./order-service
       dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
+    working_dir: /var/www/
     environment:
       - APP_ENV=local
       - DB_CONNECTION=pgsql
@@ -89,6 +88,16 @@ services:
         condition: service_healthy
     volumes:
       - ./notification-service:/var/www
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8000:80"
+    volumes:
+      - ./order-service:/var/www
+      - ./order-service/docker-compose/nginx:/etc/nginx/conf.d/
+    depends_on:
+      - order-service
 
 volumes:
   pgdata:
